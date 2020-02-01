@@ -21,8 +21,11 @@ A list of all tables under schema ```orders``` managed by ```orderserv```.
 | orders 		| **riders**	     		| table 	| orderserv		| 
 | orders 		| **rider_logs**	     	| table 	| orderserv		|
 | orders 		| **unfiltered**	     	| table 	| orderserv		| 
-
-| orders 		| **unfiltered**	     	| table 	| orderserv		|
+| orders 		| **source**	     		| enum 		| orderserv		|
+| orders 		| **demand_channels**	    | enum 		| orderserv		|
+| orders 		| **platform_states**	    | enum 		| orderserv		|
+| orders 		| **hyprful_states**	    | enum 		| orderserv		|
+| orders 		| **fulfilment_types**	    | enum 		| orderserv		|
 
 
 ### 01. orders.orders
@@ -55,7 +58,7 @@ Primary details of an order.
 
 
 ### 02. orders.items
-Primary details of an order. 
+Rows in an order. 
 
 | Coulmn   				| Type(Length)    	| Nullable  | Default   		| Example				| Comment                        						|
 | ---------------------	| ----------------- | --------- | ------------------| --------------------- | ----------------------------------------------------- |
@@ -70,14 +73,24 @@ Primary details of an order.
 
 
 ### 03. orders.item_options
-Primary details of an order. 
+Options along with an item in an order. 
 
 | Coulmn   					| Type(Length)    	| Nullable  | Default   		| Example				| Comment                        							|
 | ---------------------		| ----------------- | --------- | ------------------| --------------------- | ----------------------------------------------------- 	|
-| **id (pk)**    			| ```bigint(8)``` 	| **false** | ```nextval```     | ```54567735```		| **[Primary-Key]**. *Unique* and *self-generated*.	 		|
-| **order_item_id (fk)**   	| ```bigint(8)``` 	| **false** | ```unique```		| ```346735```			| **[Foreign-Key]**. *Unique* ID of ```orders.items``` row.	|
+| **id (pk)**    			| ```bigint(8)``` 	| **false** | ```nextval```     | ```456723```		| **[Primary-Key]**. *Unique* and *self-generated*.	 		|
+| **order_item_id (fk)**   	| ```bigint(8)``` 	| **false** | ```unique```		| ```54567735```			| **[Foreign-Key]**. *Unique* ID of ```orders.items``` row.	|
 | **item_id**   			| ```bigint(8)``` 	| true		| none				| ```4327```			| Unique identifier of option-item within Hyprful.			|
+| **add**   				| ```boolean``` 	| **false**	| ```t```			| ```f```				| Should option be added or removed.						|
 | **title**		   			| ```text``` 		| true		| none				| ```Cheese (small)```	| Title of option-item.					 					|
 | **price**   				| ```float``` 		| true		| none				| ```40.00```			| Base price of option-item.					 			|
 
 
+### 04. orders.item_charges
+Charges applied to an item in an order. 
+
+| Coulmn   					| Type(Length)    	| Nullable  | Default   		| Example					| Comment                        							|
+| ---------------------		| ----------------- | --------- | ------------------| ------------------------- | ----------------------------------------------------- 	|
+| **id (pk)**    			| ```bigint(8)``` 	| **false** | ```nextval```     | ```4335677545```			| **[Primary-Key]**. *Unique* and *self-generated*.	 		|
+| **order_item_id (fk)**   	| ```bigint(8)``` 	| **false** | ```unique```		| ```54567735```			| **[Foreign-Key]**. *Unique* ID of ```orders.items``` row.	|
+| **title**		   			| ```text``` 		| true		| none				| ```Packaging Charge```	| Title of charge applied.					 					|
+| **value**   				| ```float``` 		| **false**	| ```0.00```		| ```10.00```				| Value of charge applied.					 			|
