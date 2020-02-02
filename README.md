@@ -62,11 +62,17 @@ This also containes 6 enumerated values to ease queries by platforms and state, 
 
 
 Listed below are the current enums in the table and their base values. More will be added with integrations and use-cases. 
+
 **```source**```** - ```URBANPIPER```, ```HYPRFUL_POS_OFFLINE```, ```UNKNOWN```
+
 **```demand_channel**```** - ```SWIGGY```, ```ZOMATO```, ```UBER_EATS```, ```DUNZO```, ```SWIGGY_STORES```, ```UNMAPPED``` 
+
 **```platform_state**```** - ```RECEIVED```, ```ACCEPTED```, ```REJECTED```, ```PREPARING```, ```FOOD_READY```, ```DISPATCHED```, ```DELIVERED```, ```CANCELLED```, ```UNKNOWN```
+
 **```hyprful_state**```** - ```ACCEPTED```, ```ASSIGNED```, ```PREPARING```, ```FOOD_READY```, ```PACKED```, ```DISPATCHED``` and more.
+
 **```fulfilment_type**```** - ```DELIVERY```, ```TAKEAWAY```, ```UNKNOWN```
+
 **```delivery_state**```** - ```UNASSIGNED```, ```ASSIGNED```, ```RE_ASSIGNED```, ```AT_MERCHANT```, ```OUT_FOR_DELIVERY```, ```DELIVERED```, ```UNKNOWN```
 
 
