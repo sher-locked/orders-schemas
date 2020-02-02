@@ -9,7 +9,7 @@ A list of all tables under schema ```orders``` managed by ```orderserv```.
 | ------------- | ------------------------- | --------- | ------------- |
 | orders    	| **orders** 				| ```table``` 	| orderserv 	|
 | orders   		| **items**	  				| table 	| orderserv		|
-| orders   		| **item_options**	  		| ```**table**``` 	| orderserv		|
+| orders   		| **item_options**	  		| **```table```** 	| orderserv		|
 | orders   		| **item_charges**	  		| table 	| orderserv		|
 | orders   		| **item_taxes**	  		| table 	| orderserv		|
 | orders   		| **charges**	  			| table 	| orderserv		|
