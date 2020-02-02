@@ -1,19 +1,20 @@
 ## ```Orders``` Schema
 
-This documents the schema design of ```orders``` postgres DB, with the tables, columns, types and constraints under the current micro-service spec. 
+This documents the schema design of ```orders``` schema postgres DB, with the tables, columns, types and constraints under the current micro-service spec. 
 
 ### orders.tables
 A list of all tables under schema ```orders``` managed by ```orderserv```. 
 
 | Schema   		| Name 			   			| Type  	| Owner   		|
 | ------------- | ------------------------- | --------- | ------------- |
-| orders    	| **orders** 				| table 	| orderserv 	| 
+| orders    	| **orders** 				| ```table``` 	| orderserv 	|
 | orders   		| **items**	  				| table 	| orderserv		|
+| orders   		| **item_options**	  		| ```**table**``` 	| orderserv		|
 | orders   		| **item_charges**	  		| table 	| orderserv		|
-| orders   		| **item_options**	  		| table 	| orderserv		|
-| orders   		| **item_taxes**	  		| table 	| orderserv		| 
-| orders 		| **discounts**     		| table 	| orderserv		|
-| orders		| **billing**	  			| table 	| orderserv 	| 
+| orders   		| **item_taxes**	  		| table 	| orderserv		|
+| orders   		| **charges**	  			| table 	| orderserv		|
+| orders   		| **taxes**	  				| table 	| orderserv		| 
+| orders 		| **discounts**     		| table 	| orderserv		| 
 | orders		| **payments**	  			| table 	| orderserv 	| 
 | orders 		| **logs**		     		| table 	| orderserv		|
 | orders 		| **customers**     		| table 	| orderserv		| 
@@ -29,7 +30,8 @@ A list of all tables under schema ```orders``` managed by ```orderserv```.
 
 
 ### 01. orders.orders
-Primary details of an order. 
+The primary table of this schema. Designed is such a way so as to fully provide analytics on orders queryable by brand or store (```outlet_id```). 
+This also containes 5 enumerated values to ease queries by platforms and state, values of which are listed below. 
 
 | Coulmn   				| Type(Length)    	| Nullable  | Default   		| Example				| Comment                        						|
 | ---------------------	| ----------------- | --------- | ------------------| --------------------- | ----------------------------------------------------- |
@@ -56,9 +58,11 @@ Primary details of an order.
 | **discount**			| ```float```		| true      | 0         		| ```75.00```         	| The total discount amount applied on order.			|
 | **total_with_tax**	| ```float```		| **false** | ```0.00```        | ```341.50```	    	| The total applied on the order.						|
 
+```**source**``` enum 
+
 
 ### 02. orders.items
-Rows in an order. 
+Represents items of an order. Arguably the second most important table as it represents the menu-items and SKUs to be fulfilled for an order. 
 
 | Coulmn   				| Type(Length)    	| Nullable  | Default   		| Example				| Comment                        						|
 | ---------------------	| ----------------- | --------- | ------------------| --------------------- | ----------------------------------------------------- |
@@ -70,6 +74,35 @@ Rows in an order.
 | **discount**   		| ```float``` 		| true		| none				| ```75.00```			| Item-level discount applied.					 		|
 | **quantity**   		| ```int``` 		| **false** | ```0```			| ```1```				| Quantity.					 							|
 | **total**   			| ```float``` 		| **false** | ```0.00```		| ```187.55```			| Total including charges and taxes.					|
+
+
+The tables henceforth are primarily related to 
+
+### 02. orders.taxes
+Taxes applied at the order level.  
+
+| Coulmn   					| Type(Length)    	| Nullable  | Default   		| Example					| Comment                        						|
+| ---------------------		| ----------------- | --------- | ------------------| ------------------------- | ----------------------------------------------------- |
+| **id (pk)**    			| ```bigint(8)``` 	| **false** | ```nextval```     | ```928677545```			| **[Primary-Key]**. *Unique* and *self-generated*.	 	|
+| **order_id (fk)**		   	| ```bigint(8)``` 	| **false** | ```unique```		| ```54567735```			| **[Foreign-Key]**. *Unique* ID of ```orders``` row.	|
+| **title**		   			| ```text``` 		| true		| none				| ```CGST```				| Title of taxes applied.					 			|
+| **mode**		   			| ```text``` 		| true		| none				| ```percentage```			| Mode ```fixed``` or ```percentage```.					|
+| **rate**		   			| ```float``` 		| true		| none				| ```2.50```				| Rate of taxes applied.					 			|
+| **value**   				| ```float``` 		| **false**	| ```0.00```		| ```21.00```				| Value of taxes applied.					 			|
+
+
+### 03. orders.charges
+Taxes applied at the order level.  
+
+| Coulmn   					| Type(Length)    	| Nullable  | Default   		| Example					| Comment                        						|
+| ---------------------		| ----------------- | --------- | ------------------| ------------------------- | ----------------------------------------------------- |
+| **id (pk)**    			| ```bigint(8)``` 	| **false** | ```nextval```     | ```928677545```			| **[Primary-Key]**. *Unique* and *self-generated*.	 	|
+| **order_id (fk)**		   	| ```bigint(8)``` 	| **false** | ```unique```		| ```54567735```			| **[Foreign-Key]**. *Unique* ID of ```orders``` row.	|
+| **title**		   			| ```text``` 		| true		| none				| ```Packiging Charges```	| Title of charges applied.					 			|
+| **mode**		   			| ```text``` 		| true		| none				| ```fixed```				| Mode ```fixed``` or ```percentage```.					|
+| **rate**		   			| ```float``` 		| true		| none				| ```25.00```				| Rate of charges applied.					 			|
+| **value**   				| ```float``` 		| **false**	| ```0.00```		| ```25.00```				| Value of charges applied.					 			|
+
 
 
 ### 03. orders.item_options
