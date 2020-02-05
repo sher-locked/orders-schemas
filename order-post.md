@@ -3,9 +3,13 @@
 Create an Order 
 
 **URL** : `/api/accounts/`
+
 **Method** : `POST`
+
 **Auth required** : YES
+
 **Permissions required** : None
+
 **Data constraints**
 
 Provide name of Account to be created.
