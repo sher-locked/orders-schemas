@@ -2,15 +2,15 @@
 
 Create an Order 
 
-**URL** : `/api/accounts/`
+**Method** : ```method
+			 POST
+			 ```
 
-**Method** : `POST`
+**URL** : ```endpoint
+		  /api/accounts/
+		  ```
 
-**Auth required** : YES
-
-**Permissions required** : None
-
-**Data constraints**
+### Payload
 
 Provide name of Account to be created.
 
