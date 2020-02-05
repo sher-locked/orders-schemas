@@ -2,13 +2,15 @@
 
 Create an Order 
 
-**Method** : ```method
-			 POST
-			 ```
+**Method** : 
+```method
+	POST
+```
 
-**URL** : ```endpoint
-		  /api/accounts/
-		  ```
+**URL** : 
+```endpoint
+	/api/accounts/
+```
 
 ### Payload
 
