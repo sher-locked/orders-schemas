@@ -4,7 +4,7 @@ Endpoint to start fuflfilment for a new order.
 
 **Method** : 
 ```enpoint
-	POST /orders/
+POST /orders/
 ```
 
 **Data Constraints** Fields which cannot be null - ```source```, ```channel```, ```channelState```, ```localState```, ```fulfilmentType```, ```outletId```, ```receivedEpoch```, ```total``` & ```items[]```. 
