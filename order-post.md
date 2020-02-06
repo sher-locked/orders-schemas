@@ -1,8 +1,8 @@
-## Get Order by ID
+# Get Order by ID
 
 Endpoint to get order details by order ID.  
 
-### Request 
+## Request 
 
 **Method** : 
 ```enpoint
@@ -11,7 +11,7 @@ GET /orders/:id
 
 **Data Constraints** - ```:id``` - must be a long value and a valid order id. 
 
-#### Payload Example
+### Payload Example
 
 ```json
 {
@@ -176,10 +176,10 @@ GET /orders/:id
 }
 ```
 
-### Response
+## Response
 
 
-#### Success Sample
+### Success Sample
 
 **Condition** : If all necessary details for order-creation are sent.
 
@@ -351,7 +351,7 @@ GET /orders/:id
 }
 ```
 
-#### Error Samples
+### Error Samples
 
 **Condition** : If ```id``` is not a long value.
 
@@ -369,7 +369,7 @@ GET /orders/:id
 }
 ```
 
-##### Or
+#### Or
 
 **Condition** : If ```id``` is not found in DB.
 
